@@ -1,5 +1,8 @@
 import { Suspense } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import styled from '@emotion/styled';
 
 const StyledLink = styled(NavLink)`
@@ -28,6 +31,12 @@ const Layout = () => {
           <Outlet />
         </Suspense>
       </main>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        theme="colored"
+        pauseOnHover
+      />
       {/* <footer>Footer</footer> */}
     </>
   );
