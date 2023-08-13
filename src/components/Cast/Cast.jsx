@@ -17,7 +17,7 @@ const Cast = () => {
     const fetchMovies = async () => {
       try {
         const response = await fetchMovieCast(movieId);
-        if (response.length === 0) setError(true);
+        // if (response.length === 0) setError(true);
 
         setCast(response);
       } catch (error) {
@@ -35,7 +35,7 @@ const Cast = () => {
   return (
     <div>
       {error && <h3>Oops...</h3>}
-      {cast.length > 0 && (
+      {cast.length > 0 ? (
         <ul>
           {cast.map(({ id, profile_path, name, character }) => {
             return (
@@ -52,6 +52,8 @@ const Cast = () => {
             );
           })}
         </ul>
+      ) : (
+        <p>We don't have information about the cast of this movie</p>
       )}
     </div>
   );

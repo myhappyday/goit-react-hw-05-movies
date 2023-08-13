@@ -1,31 +1,33 @@
 import { Suspense } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import styled from '@emotion/styled';
-
-const StyledLink = styled(NavLink)`
-  color: #212121;
-
-  &.active {
-    color: #1eaea7;
-  }
-`;
+import {
+  Container,
+  StyledLink,
+  Header,
+  Nav,
+  Wrapper,
+  LogoLink,
+  LogoIcon,
+} from './Layout.styled';
 
 const Layout = () => {
   return (
-    <>
-      <header>
-        <ul>
-          <li>
+    <Container>
+      <Header>
+        <Nav>
+          <LogoLink to="/">
+            <LogoIcon />
+            MovieQuest
+          </LogoLink>
+          <Wrapper>
             <StyledLink to="/">Home</StyledLink>
-          </li>
-          <li>
             <StyledLink to="/movies">Movies</StyledLink>
-          </li>
-        </ul>
-      </header>
+          </Wrapper>
+        </Nav>
+      </Header>
       <main>
         <Suspense fallback={<div>Loading...</div>}>
           <Outlet />
@@ -37,8 +39,7 @@ const Layout = () => {
         theme="colored"
         pauseOnHover
       />
-      {/* <footer>Footer</footer> */}
-    </>
+    </Container>
   );
 };
 

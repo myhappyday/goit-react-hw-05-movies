@@ -34,7 +34,14 @@ const Movies = () => {
         const response = await fetchSearchMovies(searchValue, page);
         const { results, total_pages } = response;
 
-        if (response.length === 0) setError(true);
+        // if (response.length === 0) setError(true);
+        if (results.length === 0) {
+          setError(true);
+          toast.warn(
+            'Sorry, there are no movies matching your search query. Please try again.'
+          );
+          return;
+        }
 
         setMovies(prev => [...prev, ...results]);
         setTotalPages(total_pages);
@@ -67,7 +74,13 @@ const Movies = () => {
   return (
     <div>
       <Search onSubmit={handleFormSubmit} />
-      {error && <h3>Oops...</h3>}
+      {/* {error && movies === null ? (
+        <p>Sorry, there are no results for this query.</p>
+      ) : (
+        <h3>Oops...</h3>
+      )} */}
+      {error && <p>Sorry, we couldn't find anything for your query.</p>}
+      {/* {error && <h3>Oops...</h3>} */}
       {movies.length > 0 && (
         <ul>
           {movies.map(({ id, title, name, poster_path }) => {

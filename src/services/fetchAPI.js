@@ -20,7 +20,7 @@ export const fetchSearchMovies = async (value, page = 1) => {
     query: value,
   });
   const { data } = await axios.get(`/search/movie?${searchParams}`);
-  console.log('data:', data);
+  // console.log('data:', data);
   return data;
 };
 
