@@ -60,8 +60,6 @@ const Home = () => {
                     />
                     <p>{title ?? name}</p>
                   </Link>
-                  {/* <p>{title}</p> */}
-                  {/* <p>{id}</p> */}
                 </li>
               );
             })}

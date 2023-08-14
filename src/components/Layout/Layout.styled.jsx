@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { NavLink } from 'react-router-dom';
-import { GiFilmSpool } from 'react-icons/gi';
+import { FiFilm } from 'react-icons/fi';
 
 export const Container = styled.div`
   max-width: 1200px;
@@ -53,7 +53,9 @@ export const StyledLink = styled(NavLink)`
 `;
 
 export const LogoLink = styled(NavLink)`
-  display: inline-block;
+  display: flex;
+  grid-gap: 10px;
+  align-items: center;
   font-weight: 700;
   font-size: 26px;
   line-height: 1.19;
@@ -62,10 +64,12 @@ export const LogoLink = styled(NavLink)`
   transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 `;
 
-export const LogoIcon = styled(GiFilmSpool)`
-  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+export const LogoIcon = styled(FiFilm)`
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
-  &:hover {
-    color: #3f51b5;
+  &:hover,
+  :focus {
+    scale: 1.2;
+    box-shadow: rgba(255, 255, 255, 0.5) 0px 0px 5px 2px;
   }
 `;

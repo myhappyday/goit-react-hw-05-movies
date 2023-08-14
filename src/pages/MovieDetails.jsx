@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 
 import { fetchMovieData } from '../services/fetchAPI';
 import placeholder from '../images/no-image.png';
+import Loader from '../components/Loader';
 
 const API_IMG_URL = `https://image.tmdb.org/t/p/original`;
 
@@ -96,7 +97,7 @@ const MovieDetails = () => {
         )}
       </div>
 
-      <Suspense fallback={<div>LOADING SUBPAGE...</div>}>
+      <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
     </>
