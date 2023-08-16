@@ -1,16 +1,14 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-
 import { fetchTrendingMovies } from '../services/fetchAPI';
-import placeholder from '../images/no-image.png';
 
-const API_IMG_URL = `https://image.tmdb.org/t/p/original`;
+import Section from '../components/Section';
+import MoviesList from '../components/MoviesList';
+import ImageErrorView from '../components/ImageErrorView';
+import imageError from '../images/error-oops.jpg';
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
-  // const [page, setPage] = useState();
-  // const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -36,37 +34,23 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
-      {error && <h3>Oops...</h3>}
+    <>
       {!error && movies && movies.length > 0 && (
-        <>
-          <h2>Trending today</h2>
-          <ul>
-            {movies.map(({ id, title, name, poster_path }) => {
-              return (
-                <li key={id}>
-                  <Link
-                    to={`movies/${id}`}
-                    //  state={{ from: location }}
-                  >
-                    <img
-                      src={
-                        poster_path ? API_IMG_URL + poster_path : placeholder
-                      }
-                      alt={title ?? name}
-                      loading="lazy"
-                      width="300"
-                      // height="300"
-                    />
-                    <p>{title ?? name}</p>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </>
+        <Section title="Trending today">
+          <MoviesList movies={movies} />
+        </Section>
       )}
-    </div>
+      {error && (
+        <ImageErrorView
+          imageURL={imageError}
+          alt={'Something went wrong'}
+          width="600"
+          message={
+            'Oops! Something went wrong. Please, reload the page and try again.'
+          }
+        />
+      )}
+    </>
   );
 };
 

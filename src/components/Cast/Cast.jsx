@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { fetchMovieCast } from '../../services/fetchAPI';
-import placeholder from '../../images/no-actors.png';
+import placeholder from '../../images/no-image.png';
 const API_IMG_URL = `https://image.tmdb.org/t/p/w300/`;
 
 const Cast = () => {

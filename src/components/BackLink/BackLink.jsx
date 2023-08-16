@@ -2,9 +2,9 @@ import { BiArrowBack } from 'react-icons/bi';
 import { BtnLink } from './BackLink.styled';
 import PropTypes from 'prop-types';
 
-const BackLink = ({ patch }) => {
+const BackLink = ({ path }) => {
   return (
-    <BtnLink to={patch}>
+    <BtnLink to={path}>
       <BiArrowBack />
       Go back
     </BtnLink>

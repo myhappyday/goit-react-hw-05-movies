@@ -6,6 +6,7 @@ export const Container = styled.div`
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 20px;
   padding: 0 15px;
 `;
 
@@ -31,14 +32,15 @@ export const Wrapper = styled.div`
 `;
 
 export const StyledLink = styled(NavLink)`
-  padding: 8px 16px;
   display: inline-block;
+  width: 60px;
+  padding: 8px 16px;
   border-radius: 4px;
   font-weight: 500;
   text-decoration: none;
   color: #212121;
   border: 1px solid #3f51b5;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
   &.active {
     color: white;
@@ -70,6 +72,6 @@ export const LogoIcon = styled(FiFilm)`
   &:hover,
   :focus {
     scale: 1.2;
-    box-shadow: rgba(255, 255, 255, 0.5) 0px 0px 5px 2px;
+    box-shadow: #3f51b5 0px 0px 5px 2px;
   }
 `;

@@ -4,8 +4,10 @@ import { Link, useSearchParams, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { fetchSearchMovies } from '../services/fetchAPI';
-import Search from '../components/Search';
 import placeholder from '../images/no-image.png';
+
+import Section from '../components/Section';
+import Search from '../components/Search';
 
 const API_IMG_URL = `https://image.tmdb.org/t/p/original`;
 
@@ -72,45 +74,54 @@ const Movies = () => {
   };
 
   return (
-    <div>
+    <>
       <Search onSubmit={handleFormSubmit} />
-      {/* {error && movies === null ? (
+      {movies.length > 0 && (
+        <Section title="At your request, the following films were found:">
+          {/* {error && movies === null ? (
         <p>Sorry, there are no results for this query.</p>
       ) : (
         <h3>Oops...</h3>
       )} */}
-      {error && <p>Sorry, we couldn't find anything for your query.</p>}
-      {/* {error && <h3>Oops...</h3>} */}
-      {movies.length > 0 && (
-        <ul>
-          {movies.map(({ id, title, name, poster_path }) => {
-            return (
-              <li key={id}>
-                <Link to={`${currentPage}/${id}`} state={{ from: location }}>
-                  <img
-                    src={poster_path ? API_IMG_URL + poster_path : placeholder}
-                    alt={title ?? name}
-                    loading="lazy"
-                    width="300"
-                    // height="300"
-                  />
-                  <p>{title ?? name}</p>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+          {error && <p>Sorry, we couldn't find anything for your query.</p>}
+          {/* {error && <h3>Oops...</h3>} */}
+          {movies.length > 0 && (
+            <ul>
+              {movies.map(({ id, title, name, poster_path }) => {
+                return (
+                  <li key={id}>
+                    <Link
+                      to={`${currentPage}/${id}`}
+                      state={{ from: location }}
+                    >
+                      <img
+                        src={
+                          poster_path ? API_IMG_URL + poster_path : placeholder
+                        }
+                        alt={title ?? name}
+                        loading="lazy"
+                        width="300"
+                        // height="300"
+                      />
+                      <p>{title ?? name}</p>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+          {page < totalPages && (
+            <button
+              type="button"
+              aria-label="Load more"
+              onClick={() => setPage(prev => prev + 1)}
+            >
+              Load more
+            </button>
+          )}
+        </Section>
       )}
-      {page < totalPages && (
-        <button
-          type="button"
-          aria-label="Load more"
-          onClick={() => setPage(prev => prev + 1)}
-        >
-          Load more
-        </button>
-      )}
-    </div>
+    </>
   );
 };
 
