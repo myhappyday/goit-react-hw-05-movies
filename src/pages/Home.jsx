@@ -46,7 +46,7 @@ const Home = () => {
           alt={'Something went wrong'}
           width="600"
           message={
-            'Oops! Something went wrong. Please, reload the page and try again.'
+            'Please, reload the page and try again.'
           }
         />
       )}

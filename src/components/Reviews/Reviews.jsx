@@ -3,6 +3,9 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { fetchMovieReviews } from '../../services/fetchAPI';
+// import ImageErrorView from '../ImageErrorView';
+// import imageError from '../../images/error-oops.jpg';
+import { ListStyled, ItemStyled, Author, Text, Message } from './Reviews.styled'
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
@@ -33,23 +36,32 @@ const Reviews = () => {
 
   return (
     <div>
-      {error && <h3>Oops...</h3>}
-      {reviews.length > 0 ? (
-        <ul>
+      {/* {error && (
+        <ImageErrorView
+          imageURL={imageError}
+          alt={'Something went wrong'}
+          width="600"
+          message={
+            'Please, reload the page and try again.'
+          }
+        />
+      )} */}     
+      {!error && reviews && reviews.length > 0 ? (
+        <ListStyled>
           {reviews.map(({ id, author, content }) => {
             return (
-              <li key={id}>
-                <h4>{`Author: ${author}`}</h4>
-                <p>{content}</p>
-              </li>
+              <ItemStyled key={id}>
+                <Author>{`Author: ${author}`}</Author>
+                <Text>{content}</Text>
+              </ItemStyled>
             );
           })}
-        </ul>
+        </ListStyled>
       ) : (
-        <p>We don't have any reviews for this movie</p>
+        <Message>We don't have any reviews for this movie</Message>
       )}
     </div>
   );
-};
+}; 
 
 export default Reviews;

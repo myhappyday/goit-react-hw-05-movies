@@ -10,7 +10,7 @@ import ImageErrorView from '../components/ImageErrorView';
 import imageError from '../images/error-oops.jpg';
 
 const MovieDetails = () => {
-  const [movieData, setMovieData] = useState([]);
+  const [movieData, setMovieData] = useState();
   const [error, setError] = useState(null);
 
   const { movieId } = useParams();
@@ -25,7 +25,7 @@ const MovieDetails = () => {
         const response = await fetchMovieData(movieId);
         if (response.length === 0) setError(true);
 
-        setMovieData(response);
+        setMovieData(response);       
       } catch (error) {
         setError(true);
         console.error(error.message);
@@ -40,9 +40,7 @@ const MovieDetails = () => {
 
   return (
     <div>
-      <BackLink path={backLinkLocationRef.current} />
-      {/* <div> */}
-      {/* {error && <h3>Oops...</h3>} */}
+      <BackLink path={backLinkLocationRef.current} />     
       {!error && movieData && <MovieData movieData={movieData} />}
       {error && (
         <ImageErrorView
@@ -50,11 +48,10 @@ const MovieDetails = () => {
           alt={'Something went wrong'}
           width="600"
           message={
-            'Oops! Something went wrong. Please, reload the page and try again.'
+            'Please, reload the page and try again.'
           }
         />
-      )}
-      {/* </div> */}
+      )}      
     </div>
   );
 };

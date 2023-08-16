@@ -3,6 +3,9 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { fetchMovieCast } from '../../services/fetchAPI';
+// import ImageErrorView from '../ImageErrorView';
+// import imageError from '../../images/error-oops.jpg';
+import { ListStyled, ItemStyled, ImageStyled, Name, Character, Message } from "./Cast.styled";
 import placeholder from '../../images/no-image.png';
 const API_IMG_URL = `https://image.tmdb.org/t/p/w300/`;
 
@@ -19,6 +22,8 @@ const Cast = () => {
         const response = await fetchMovieCast(movieId);
         // if (response.length === 0) setError(true);
 
+        // console.log(response);
+
         setCast(response);
       } catch (error) {
         setError(true);
@@ -33,27 +38,36 @@ const Cast = () => {
   }, [movieId]);
 
   return (
-    <div>
-      {error && <h3>Oops...</h3>}
-      {cast.length > 0 ? (
-        <ul>
+    <div>      
+      {/* {error && (
+        <ImageErrorView
+          imageURL={imageError}
+          alt={'Something went wrong'}
+          width="600"
+          message={
+            'Please, reload the page and try again.'
+          }
+        />
+      )} */}
+      {!error && cast && cast.length > 0 ? (
+        <ListStyled>
           {cast.map(({ id, profile_path, name, character }) => {
             return (
-              <li key={id}>
-                <img
+              <ItemStyled key={id}>
+                <ImageStyled
                   src={profile_path ? API_IMG_URL + profile_path : placeholder}
                   alt={name}
                   loading="lazy"
                   width="120"
                 />
-                <h4>{name}</h4>
-                <p>{`Character: ${character}`}</p>
-              </li>
+                <Name>{name}</Name>
+                <Character>{character}</Character>
+              </ItemStyled>
             );
           })}
-        </ul>
+        </ListStyled>
       ) : (
-        <p>We don't have information about the cast of this movie</p>
+        <Message>We don't have information about the cast of this movie</Message>
       )}
     </div>
   );

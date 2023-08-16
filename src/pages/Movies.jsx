@@ -4,7 +4,7 @@ import { Link, useSearchParams, useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { fetchSearchMovies } from '../services/fetchAPI';
-import placeholder from '../images/no-image.png';
+import placeholder from '../images/no-poster.png';
 
 import Section from '../components/Section';
 import Search from '../components/Search';

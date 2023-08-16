@@ -37,8 +37,7 @@ const Search = ({ onSubmit }) => {
         value={value}
         onChange={handleChange}
       />
-      <Button type="submit">
-        Search
+      <Button type="submit">        
         <ImSearch size={24} />
       </Button>
     </Form>
