@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { fetchTrendingMovies } from '../services/fetchAPI';
 
+import { fetchTrendingMovies } from '../services/fetchAPI';
 import Section from '../components/Section';
 import MoviesList from '../components/MoviesList';
 import ImageErrorView from '../components/ImageErrorView';

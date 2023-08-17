@@ -5,7 +5,6 @@ import { toast } from 'react-toastify';
 import { fetchMovieData } from '../services/fetchAPI';
 import BackLink from '../components/BackLink';
 import MovieData from '../components/MovieData';
-
 import ImageErrorView from '../components/ImageErrorView';
 import imageError from '../images/error-oops.jpg';
 

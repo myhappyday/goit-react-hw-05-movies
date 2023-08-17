@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { fetchMovieReviews } from '../../services/fetchAPI';
-// import ImageErrorView from '../ImageErrorView';
-// import imageError from '../../images/error-oops.jpg';
+import ImageErrorView from '../ImageErrorView';
+import imageError from '../../images/error-oops.jpg';
 import {
   ListStyled,
   ItemStyled,
@@ -22,14 +22,14 @@ const Reviews = () => {
     setError(false);
 
     const fetchMovies = async () => {
-      try {
-        // setError(false);
+      try {      
         const response = await fetchMovieReviews(movieId);
-        // if (response.length === 0) setError(true);
+        if (response.length === 0) setError(true);
 
         setReviews(response);
       } catch (error) {
         setError(true);
+        setReviews(null);
         console.error(error.message);
         toast.error(
           'Oops! Something went wrong. Please, reload the page and try again.'
@@ -42,7 +42,7 @@ const Reviews = () => {
 
   return (
     <div>
-      {/* {error && (
+      {error && reviews === null && (
         <ImageErrorView
           imageURL={imageError}
           alt={'Something went wrong'}
@@ -51,8 +51,11 @@ const Reviews = () => {
             'Please, reload the page and try again.'
           }
         />
-      )} */}
-      {!error && reviews && reviews.length > 0 ? (
+      )}
+      {error && reviews !== null && (
+        <Message>We don't have any reviews for this movie</Message>
+      )}
+      {!error && reviews && reviews.length > 0 && (
         <ListStyled>
           {reviews.map(({ id, author, content }) => {
             return (
@@ -63,8 +66,6 @@ const Reviews = () => {
             );
           })}
         </ListStyled>
-      ) : (
-        <Message>We don't have any reviews for this movie</Message>
       )}
     </div>
   );

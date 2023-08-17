@@ -31,12 +31,12 @@ export const LinkStyled = styled(Link)`
 
 export const ImageStyled = styled.img`
   width: 100%;
-  height: auto;
+  height: 440px;
   object-fit: cover;
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 `;
 
-export const TitleStyled = styled.p`
+export const Title = styled.p`
   margin: 0 auto;
   padding: 30px 15px;
   text-align: center;

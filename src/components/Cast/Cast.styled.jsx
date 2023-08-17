@@ -49,6 +49,6 @@ export const Message = styled.p`
   padding: 24px;
   text-align: center;
   color: #3f51b5;
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 500;
 `;

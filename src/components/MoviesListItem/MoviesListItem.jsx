@@ -1,12 +1,11 @@
-import { useLocation } from 'react-router-dom'; // import { Link } from 'react-router-dom';
-
+import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import {
   ItemStyled,
   LinkStyled,
   ImageStyled,
-  TitleStyled,
+  Title,
 } from './MoviesListItem.styled';
 
 import placeholder from '../../images/no-poster.png';
@@ -27,7 +26,7 @@ const MoviesListItem = ({ id, title, original_title, poster }) => {
           width="280"
           height="420"
         />
-        <TitleStyled>{title ?? original_title}</TitleStyled>
+        <Title>{title ?? original_title}</Title>
       </LinkStyled>
     </ItemStyled>
   );

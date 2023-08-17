@@ -39,8 +39,7 @@ export const Button = styled.button`
   background-color: rgb(243, 243, 243);
   background-size: 40%;
   background-repeat: no-repeat;
-  background-position: center;
-  // opacity: 0.6;
+  background-position: center;  
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   outline: none;
@@ -48,7 +47,6 @@ export const Button = styled.button`
   :hover,
   :focus {
     background-color: #3f51b5;
-    color: white;
-    // opacity: 1;
+    color: white;   
   }
 `;

@@ -7,7 +7,8 @@ import Search from '../components/Search';
 import Section from '../components/Section';
 import MoviesList from '../components/MoviesList';
 import ImageErrorView from '../components/ImageErrorView';
-import imageError from '../images/error-oops.jpg';
+import imageError from '../images/error.jpg';
+import ButtonLoadMore from '../components/ButtonLoadMore';
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
@@ -29,8 +30,7 @@ const Movies = () => {
       try {
         const response = await fetchSearchMovies(searchValue, page);
         const { results, total_pages } = response;
-
-        // if (response.length === 0) setError(true);
+       
         if (results.length === 0) {
           setError(true);
           toast.warn(
@@ -43,6 +43,7 @@ const Movies = () => {
         setTotalPages(total_pages);
       } catch (error) {
         setError(true);
+        setMovies(null)
         console.error(error.message);
         toast.error(
           'Oops! Something went wrong. Please, reload the page and try again.'
@@ -67,40 +68,33 @@ const Movies = () => {
   };
 
   return (
-    <div>
+    <>
       <Search onSubmit={handleFormSubmit} />
-      {error && (
+      {error && movies !== null && (
         <ImageErrorView
           imageURL={imageError}
-          alt={'Something went wrong'}
-          width="600"
-          message={'Please, reload the page and try again.'}
+          alt={'Crying meme'}
+          width="300"
+          message={`Sorry, we couldn't find anything for your query.`}
         />
+      )}
+      {error && movies === null && (
+          <ImageErrorView
+            imageURL={imageError}
+            alt={'Crying meme'}
+            width="300"
+            message={'Oops! Something went wrong. Please, reload the page and try again.'}
+          />
       )}
       {!error && movies && movies.length > 0 && (
         <Section title="At your request, the following films were found:">
-          {error && (
-            <ImageErrorView
-              imageURL={imageError}
-              alt={'Something went wrong'}
-              width="600"
-              message={'Please, reload the page and try again.'}
-            />
-          )}
-          {/* {error && <p>Sorry, we couldn't find anything for your query.</p>} */}
           <MoviesList movies={movies} />
           {page < totalPages && (
-            <button
-              type="button"
-              aria-label="Load more"
-              onClick={() => setPage(prev => prev + 1)}
-            >
-              Load more
-            </button>
+            <ButtonLoadMore onClick={() => setPage(prev => prev + 1)}/>
           )}
         </Section>
       )}
-    </div>
+    </>
   );
 };
 
