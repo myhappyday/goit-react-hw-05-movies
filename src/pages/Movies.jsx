@@ -1,15 +1,13 @@
 import { useState, useEffect } from 'react';
-import { Link, useSearchParams, useLocation } from 'react-router-dom';
-// import { ImSearch } from 'react-icons/im';
+import { useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { fetchSearchMovies } from '../services/fetchAPI';
-import placeholder from '../images/no-poster.png';
-
-import Section from '../components/Section';
 import Search from '../components/Search';
-
-const API_IMG_URL = `https://image.tmdb.org/t/p/original`;
+import Section from '../components/Section';
+import MoviesList from '../components/MoviesList';
+import ImageErrorView from '../components/ImageErrorView';
+import imageError from '../images/error-oops.jpg';
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
@@ -17,10 +15,6 @@ const Movies = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [error, setError] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
-
-  const location = useLocation();
-  // console.log('location: ', location);
-  const currentPage = location.pathname === '/' ? 'movies' : location.pathname;
 
   useEffect(() => {
     setError(false);
@@ -68,48 +62,33 @@ const Movies = () => {
       return toast.warn(
         'You have already searched for movies with this keyword. Please try something else.'
       );
-      // return;
     }
     setSearchParams({ query: value });
   };
 
   return (
-    <>
+    <div>
       <Search onSubmit={handleFormSubmit} />
-      {movies.length > 0 && (
+      {error && (
+        <ImageErrorView
+          imageURL={imageError}
+          alt={'Something went wrong'}
+          width="600"
+          message={'Please, reload the page and try again.'}
+        />
+      )}
+      {!error && movies && movies.length > 0 && (
         <Section title="At your request, the following films were found:">
-          {/* {error && movies === null ? (
-        <p>Sorry, there are no results for this query.</p>
-      ) : (
-        <h3>Oops...</h3>
-      )} */}
-          {error && <p>Sorry, we couldn't find anything for your query.</p>}
-          {/* {error && <h3>Oops...</h3>} */}
-          {movies.length > 0 && (
-            <ul>
-              {movies.map(({ id, title, name, poster_path }) => {
-                return (
-                  <li key={id}>
-                    <Link
-                      to={`${currentPage}/${id}`}
-                      state={{ from: location }}
-                    >
-                      <img
-                        src={
-                          poster_path ? API_IMG_URL + poster_path : placeholder
-                        }
-                        alt={title ?? name}
-                        loading="lazy"
-                        width="300"
-                        // height="300"
-                      />
-                      <p>{title ?? name}</p>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
+          {error && (
+            <ImageErrorView
+              imageURL={imageError}
+              alt={'Something went wrong'}
+              width="600"
+              message={'Please, reload the page and try again.'}
+            />
           )}
+          {/* {error && <p>Sorry, we couldn't find anything for your query.</p>} */}
+          <MoviesList movies={movies} />
           {page < totalPages && (
             <button
               type="button"
@@ -121,7 +100,7 @@ const Movies = () => {
           )}
         </Section>
       )}
-    </>
+    </div>
   );
 };
 

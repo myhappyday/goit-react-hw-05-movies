@@ -1,4 +1,5 @@
-// import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom'; // import { Link } from 'react-router-dom';
+
 import PropTypes from 'prop-types';
 
 import {
@@ -12,21 +13,21 @@ import placeholder from '../../images/no-poster.png';
 
 const API_IMG_URL = `https://image.tmdb.org/t/p/original`;
 
-const MoviesListItem = ({ id, title, name, poster }) => {
+const MoviesListItem = ({ id, title, original_title, poster }) => {
+  const location = useLocation();
+  const currentPage = location.pathname === '/' ? 'movies' : location.pathname;
+
   return (
     <ItemStyled>
-      <LinkStyled
-        to={`movies/${id}`}
-        //  state={{ from: location }}
-      >
+      <LinkStyled to={`${currentPage}/${id}`} state={{ from: location }}>
         <ImageStyled
           src={poster ? API_IMG_URL + poster : placeholder}
-          alt={title ?? name}
+          alt={title ?? original_title}
           loading="lazy"
           width="280"
           height="420"
         />
-        <TitleStyled>{title ?? name}</TitleStyled>
+        <TitleStyled>{title ?? original_title}</TitleStyled>
       </LinkStyled>
     </ItemStyled>
   );
@@ -35,7 +36,7 @@ const MoviesListItem = ({ id, title, name, poster }) => {
 MoviesListItem.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string,
-  name: PropTypes.string,
+  original_title: PropTypes.string,
   poster: PropTypes.string,
 };
 

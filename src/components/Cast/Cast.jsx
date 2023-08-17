@@ -5,7 +5,14 @@ import { toast } from 'react-toastify';
 import { fetchMovieCast } from '../../services/fetchAPI';
 // import ImageErrorView from '../ImageErrorView';
 // import imageError from '../../images/error-oops.jpg';
-import { ListStyled, ItemStyled, ImageStyled, Name, Character, Message } from "./Cast.styled";
+import {
+  ListStyled,
+  ItemStyled,
+  ImageStyled,
+  Name,
+  Character,
+  Message,
+} from './Cast.styled';
 import placeholder from '../../images/no-image.png';
 const API_IMG_URL = `https://image.tmdb.org/t/p/w300/`;
 
@@ -38,7 +45,7 @@ const Cast = () => {
   }, [movieId]);
 
   return (
-    <div>      
+    <div>
       {/* {error && (
         <ImageErrorView
           imageURL={imageError}
@@ -67,7 +74,9 @@ const Cast = () => {
           })}
         </ListStyled>
       ) : (
-        <Message>We don't have information about the cast of this movie</Message>
+        <Message>
+          We don't have information about the cast of this movie
+        </Message>
       )}
     </div>
   );

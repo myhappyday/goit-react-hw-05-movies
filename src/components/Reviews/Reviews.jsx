@@ -5,7 +5,13 @@ import { toast } from 'react-toastify';
 import { fetchMovieReviews } from '../../services/fetchAPI';
 // import ImageErrorView from '../ImageErrorView';
 // import imageError from '../../images/error-oops.jpg';
-import { ListStyled, ItemStyled, Author, Text, Message } from './Reviews.styled'
+import {
+  ListStyled,
+  ItemStyled,
+  Author,
+  Text,
+  Message,
+} from './Reviews.styled';
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
@@ -45,7 +51,7 @@ const Reviews = () => {
             'Please, reload the page and try again.'
           }
         />
-      )} */}     
+      )} */}
       {!error && reviews && reviews.length > 0 ? (
         <ListStyled>
           {reviews.map(({ id, author, content }) => {
@@ -62,6 +68,6 @@ const Reviews = () => {
       )}
     </div>
   );
-}; 
+};
 
 export default Reviews;

@@ -10,7 +10,6 @@ export const ListStyled = styled.ul`
 `;
 
 export const ItemStyled = styled.li`
-  padding: 15px 0;
   border-bottom: 1px solid 3f51b5;
 `;
 
@@ -23,7 +22,6 @@ export const Author = styled.h4`
 `;
 
 export const Text = styled.p`
-  // margin-bottom: 15px;
   font-size: 16px;
   line-height: 1.1;
   color: #212121;

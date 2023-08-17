@@ -13,7 +13,7 @@ import {
   Text,
   AdditionalInfo,
   NavList,
-  NavLinkStyled
+  NavLinkStyled,
 } from './MovieData.styled';
 
 const API_IMG_URL = `https://image.tmdb.org/t/p/original`;
@@ -28,7 +28,7 @@ const MovieData = ({ movieData }) => {
     genres,
     release_date,
   } = movieData;
-  
+
   const getGenresMovies = genres => {
     if (genres) {
       return genres.map(genre => genre.name).join(', ');
@@ -38,20 +38,20 @@ const MovieData = ({ movieData }) => {
     <div>
       <Wrapper>
         <ImageStyled
-        src={poster_path ? API_IMG_URL + poster_path : placeholder}
-        alt={title ?? original_title}
-        width="300"
-        height="auto"
-      />
+          src={poster_path ? API_IMG_URL + poster_path : placeholder}
+          alt={title ?? original_title}
+          width="300"
+          height="auto"
+        />
         <TextWrapper>
           <Title>
-        {title ?? original_title}
-        {release_date && <span> ({parseInt(release_date)})</span>}
-      </Title>
-      <Text>User score: {Math.round(vote_average * 10)}%</Text>
-      <SubTitle>Overview</SubTitle>
-      <Text>{overview}</Text>
-      <SubTitle>Genres</SubTitle>
+            {title ?? original_title}
+            {release_date && <span> ({parseInt(release_date)})</span>}
+          </Title>
+          <Text>User score: {Math.round(vote_average * 10)}%</Text>
+          <SubTitle>Overview</SubTitle>
+          <Text>{overview}</Text>
+          <SubTitle>Genres</SubTitle>
           <Text>{getGenresMovies(genres)}</Text>
         </TextWrapper>
       </Wrapper>
@@ -80,12 +80,12 @@ MovieData.propTypes = {
     original_title: PropTypes.string,
     vote_average: PropTypes.number,
     overview: PropTypes.string,
-    release_date: PropTypes.string,   
+    release_date: PropTypes.string,
     genres: PropTypes.arrayOf(
-       PropTypes.shape({
-         name: PropTypes.string,
-       })
-     ),    
+      PropTypes.shape({
+        name: PropTypes.string,
+      })
+    ),
   }),
 };
 
